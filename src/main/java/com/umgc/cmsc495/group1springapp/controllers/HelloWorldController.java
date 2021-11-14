@@ -19,7 +19,7 @@ public class HelloWorldController {
 		String name = request.getParameter("name");
 
 		if(name == null || name.isEmpty()){
-			name = "World!";
+			name = "World";
 		}
 
 		model.addAttribute("message", "Hello, " + name + "!");
