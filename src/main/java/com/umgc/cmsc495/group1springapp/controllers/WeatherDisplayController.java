@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class WeatherDisplayController {
-	@RequestMapping(value = "/weather-display", method = RequestMethod.GET)
+	@RequestMapping(value = "/weather-display", method = RequestMethod.POST)
 	public String weatherDisplay(HttpServletRequest request, Model model){
 		String zip = request.getParameter("zip") == null ? "" : request.getParameter("zip");
-		String numDays = request.getParameter("num-days") == null ? "" : request.getParameter("num-days");
+		String numDays = request.getParameter("numdays") == null ? "" : request.getParameter("numdays");
 
-		model.addAttribute("zip", "ZIP: " + zip);
-		model.addAttribute("numDays", "Number of Days: " + numDays);
+		model.addAttribute("zip", zip);
+		model.addAttribute("numdays", numDays);
 
 		return "weather-display";
 	}
