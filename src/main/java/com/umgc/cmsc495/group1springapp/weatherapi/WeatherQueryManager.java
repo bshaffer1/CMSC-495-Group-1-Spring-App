@@ -19,9 +19,11 @@ import java.util.Map;
 public class WeatherQueryManager {
 
 	private LatLong latLong;
+	private int numDays;
 
-	public WeatherQueryManager(String zip) {
+	public WeatherQueryManager(String zip, int numDays) {
 		setLatLongFromZip(zip);
+		this.numDays = numDays;
 	}
 
 	public void setLatLongFromZip(String zip) {
@@ -32,10 +34,20 @@ public class WeatherQueryManager {
 		this.latLong = latLong;
 	}
 
-	public WeatherResult queryWeather() throws JsonProcessingException {
+	public WeatherResult queryWeather() {
 		String latitude = latLong.getLatitude();
 		String longitude = latLong.getLongitude();
 
+		try {
+			return getWeatherResult(latitude, longitude);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+
+		return null;
+	}
+
+	private WeatherResult getWeatherResult(String latitude, String longitude) throws JsonProcessingException {
 		Response response = ClientBuilder.newClient()
 				.target("https://api.weather.gov")
 				.path("points/" + latitude + "," + longitude)
@@ -70,10 +82,20 @@ public class WeatherQueryManager {
 
 		List<Object> listPeriods = objectMapper.convertValue(periods, List.class);
 
-		List<Map<String, Object>> allPeriods = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> allPeriods = new ArrayList<>();
+		int periodsToReturn = numDays * 2;
+		int count = 0;
 		for (Object period : listPeriods) {
-			Map<String, Object> periodMap = objectMapper.convertValue(period, Map.class);
-			allPeriods.add(periodMap);
+			if(count == periodsToReturn){
+				break;
+			}
+
+			if (count % 2 == 0) {
+				Map<String, Object> periodMap = objectMapper.convertValue(period, Map.class);
+				allPeriods.add(periodMap);
+			}
+
+			count ++;
 		}
 
 		return new WeatherResult(allPeriods);

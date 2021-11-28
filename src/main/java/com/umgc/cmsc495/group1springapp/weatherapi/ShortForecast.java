@@ -1,15 +1,11 @@
 package com.umgc.cmsc495.group1springapp.weatherapi;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
-import org.graalvm.compiler.hotspot.sparc.SPARCHotSpotBackend;
 
 /**
  * Author: Brandon Shaffer
  * Date: 11/28/2021
  */
-@Getter
 public enum ShortForecast {
 
 	SUNNY("Sunny", ""),
@@ -24,6 +20,14 @@ public enum ShortForecast {
 	ShortForecast(String title, String picturePath){
 		this.title = title;
 		this.picturePath = picturePath;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public String getPicturePath() {
+		return picturePath;
 	}
 
 	public static ShortForecast getShortForecast(String input){

@@ -10,30 +10,26 @@ import java.util.Map;
  */
 public class WeatherResult {
 
-	private List<Result> results;
+	private List<Weather> results;
 
 	public WeatherResult(List<Map<String, Object>> queryMap){
 		results = new ArrayList<>();
 		for (Map<String, Object> map : queryMap) {
 			Object temperature = map.get("temperature");
-			Object short_forecast = map.get("short forecast");
+			Object short_forecast = map.get("shortForecast");
+			Object date = map.get("startTime");
 
 			ShortForecast parsedForecast = parseShortForecast(short_forecast);
-			results.add(new Result(temperature, parsedForecast));
+			results.add(new Weather(temperature, parsedForecast, (String) date));
 		}
+	}
+
+	public List<Weather> getResults() {
+		return results;
 	}
 
 	private ShortForecast parseShortForecast(Object short_forecast) {
 		return ShortForecast.getShortForecast((String) short_forecast);
 	}
 
-	private class Result{
-		private Object temperature;
-		private ShortForecast shortForecast;
-
-		public Result(Object temperature, ShortForecast shortForecast) {
-			this.temperature = temperature;
-			this.shortForecast = shortForecast;
-		}
-	}
 }
