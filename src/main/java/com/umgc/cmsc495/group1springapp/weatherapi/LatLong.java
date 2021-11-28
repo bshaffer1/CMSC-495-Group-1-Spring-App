@@ -52,10 +52,11 @@ public class LatLong {
 	}
 
 	private BufferedReader getFileReader() throws FileNotFoundException, URISyntaxException {
-		URL res = getClass().getClassLoader().getResource("ZIP_to_Lat_and_Long");
-		File file = Paths.get(res.toURI()).toFile();
-		FileInputStream fileInputStream = new FileInputStream(file);
-		InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream);
+		InputStream is = getClass().getClassLoader().getResourceAsStream("ZIP_to_Lat_and_Long");
+//		URL res = getClass().getClassLoader().getResource("ZIP_to_Lat_and_Long");
+//		File file = Paths.get(res.toURI()).toFile();
+//		FileInputStream fileInputStream = new FileInputStream(file);
+		InputStreamReader inputStreamReader = new InputStreamReader(is);
 		return new BufferedReader(inputStreamReader);
 	}
 
