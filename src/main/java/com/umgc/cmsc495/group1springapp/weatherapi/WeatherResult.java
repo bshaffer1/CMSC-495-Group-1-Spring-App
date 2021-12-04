@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Weather result object for setting Weather object list and holding its values.
  * Author: Brandon Shaffer
  * Date: 11/28/2021
  */

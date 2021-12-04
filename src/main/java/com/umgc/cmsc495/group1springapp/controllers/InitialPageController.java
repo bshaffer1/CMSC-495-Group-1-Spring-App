@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * Controller for the initial page.
  * Author: Brandon Shaffer
  * Date: 11/13/2021
  */

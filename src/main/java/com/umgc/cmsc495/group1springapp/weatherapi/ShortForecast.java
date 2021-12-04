@@ -3,6 +3,7 @@ package com.umgc.cmsc495.group1springapp.weatherapi;
 import org.apache.commons.lang3.StringUtils;
 
 /**
+ * An enum to use for defining basic weather descriptions.
  * Author: Brandon Shaffer
  * Date: 11/28/2021
  */
@@ -12,6 +13,7 @@ public enum ShortForecast {
 	CLOUDY("Cloudy", ""),
 	RAINY("Rainy", ""),
 	STORMY("Stormy", ""),
+	SNOW("SNOW",""),
 	UNDEFINED("Undefined", "");
 
 	private String title;
@@ -45,6 +47,10 @@ public enum ShortForecast {
 
 		if(StringUtils.containsIgnoreCase(input, "storm")){
 			return STORMY;
+		}
+
+		if(StringUtils.containsIgnoreCase(input, "snow")){
+			return SNOW;
 		}
 
 		return UNDEFINED;

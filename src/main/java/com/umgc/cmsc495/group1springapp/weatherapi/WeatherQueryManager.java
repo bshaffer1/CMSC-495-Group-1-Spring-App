@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * Manager for handling weather query operations.
  * Author: Brandon Shaffer
  * Date: 11/18/2021
  */

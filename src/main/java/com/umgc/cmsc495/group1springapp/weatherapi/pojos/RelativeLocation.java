@@ -1,8 +1,5 @@
 package com.umgc.cmsc495.group1springapp.weatherapi.pojos;
-/**
- * Author: Brandon Shaffer
- * Date: 11/18/2021
- */
+
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Generated;
@@ -13,6 +10,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+/**
+ * Pojo used to resolve an inner object of the first query.
+ * Author: Brandon Shaffer
+ * Date: 11/18/2021
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
 		"city",

@@ -1,8 +1,4 @@
 package com.umgc.cmsc495.group1springapp.weatherapi.pojos;
-/**
- * Author: Brandon Shaffer
- * Date: 11/15/2021
- */
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +12,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+/**
+ * Pojo used to resolve the first query for weather.gov
+ * Author: Brandon Shaffer
+ * Date: 11/15/2021
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
 		"@id",

@@ -1,5 +1,7 @@
 package com.umgc.cmsc495.group1springapp.weatherapi;
+
 /**
+ * A weather object to hold weather data for a day.
  * Author: Brandon Shaffer
  * Date: 11/28/2021
  */

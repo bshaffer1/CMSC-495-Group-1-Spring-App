@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpServletRequest;
 
 /**
+ * Controller that returns the initial page if no path is defined.
  * Author: Brandon Shaffer
  * Date: 11/14/2021
  */
