@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.umgc.cmsc495.group1springapp.weatherapi.pojos.InitialQueryPojo;
 import com.umgc.cmsc495.group1springapp.weatherapi.pojos.SecondQueryPojo;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
@@ -23,7 +24,12 @@ public class WeatherQueryManager {
 	private int numDays;
 
 	public WeatherQueryManager(String zip, int numDays) {
-		setLatLongFromZip(zip);
+		try {
+			setLatLongFromZip(zip);
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			latLong = null;
+		}
 		this.numDays = numDays;
 	}
 
@@ -36,6 +42,11 @@ public class WeatherQueryManager {
 	}
 
 	public WeatherResult queryWeather() {
+
+		if(latLong == null){
+			return null;
+		}
+
 		String latitude = latLong.getLatitude();
 		String longitude = latLong.getLongitude();
 
@@ -49,6 +60,11 @@ public class WeatherQueryManager {
 	}
 
 	private WeatherResult getWeatherResult(String latitude, String longitude) throws JsonProcessingException {
+
+		if(StringUtils.isAnyBlank(latitude, longitude)){
+			return null;
+		}
+
 		Response response = ClientBuilder.newClient()
 				.target("https://api.weather.gov")
 				.path("points/" + latitude + "," + longitude)

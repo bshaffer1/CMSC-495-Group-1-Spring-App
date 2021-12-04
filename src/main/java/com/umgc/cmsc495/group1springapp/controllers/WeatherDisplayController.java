@@ -3,11 +3,12 @@ package com.umgc.cmsc495.group1springapp.controllers;
 import com.umgc.cmsc495.group1springapp.weatherapi.Weather;
 import com.umgc.cmsc495.group1springapp.weatherapi.WeatherQueryManager;
 import com.umgc.cmsc495.group1springapp.weatherapi.WeatherResult;
-import org.springframework.boot.web.server.ErrorPage;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -30,6 +31,10 @@ public class WeatherDisplayController {
 
 		WeatherQueryManager weatherQueryManager = new WeatherQueryManager(zip, Integer.parseInt(numDays));
 		WeatherResult weatherResult = weatherQueryManager.queryWeather();
+		if(weatherResult == null){
+			throw new ResponseStatusException(
+					HttpStatus.BAD_REQUEST, "Weather result was null");
+		}
 		List<Weather> weather = weatherResult.getResults();
 		model.addAttribute("weather", weather);
 
